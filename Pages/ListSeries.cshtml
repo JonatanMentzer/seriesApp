@@ -1,0 +1,38 @@
+@page
+@model Series.Pages.ListSeriesModel
+@{
+    ViewData["Title"] = "Series List";
+}
+
+<h2>Series List</h2>
+
+<p>
+    <a href="?sortOrder=asc">Sort by Rating ↑</a> |
+    <a href="?sortOrder=desc">Sort by Rating ↓</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Release Year</th>
+            <th>Company</th>
+            <th>Rating</th>
+            <th>Genres</th>
+            <th>Creators</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.SeriesList)
+        {
+            <tr>
+                <td>@s.Title</td>
+                <td>@s.ReleaseYear</td>
+                <td>@s.Company</td>
+                <td>@s.Rating</td>
+                <td>@string.Join(", ", s.SeriesGenres.Select(g => g.Genre.Name))</td>
+                <td>@string.Join(", ", s.SeriesCreators.Select(c => c.Creator.Name))</td>
+            </tr>
+        }
+    </tbody>
+</table>

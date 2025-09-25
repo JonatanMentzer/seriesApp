@@ -1,0 +1,38 @@
+@page
+@model Series.Pages.AddModel
+<h2>Add Series</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label asp-for="Series.Title"></label>
+        <input type="text" name="Series.Title" value="@Model.Series.Title" />    </div>
+
+    <div>
+        <label asp-for="Series.ReleaseYear"></label>
+        <input type="number" name="Series.ReleaseYear" value="@Model.Series.ReleaseYear" />
+    </div>
+
+    <div>
+        <label asp-for="Series.Company"></label>
+        <input type="text" name="Series.Company" value="@Model.Series.Company" />
+    </div>
+
+    <div>
+        <label asp-for="CreatorName"></label>
+        <input type="text" name="CreatorName" value="@Model.CreatorName" />
+    </div>
+
+    <div>
+        <label asp-for="GenreName"></label>
+        <input type="text" name="GenreName" value="@Model.GenreName" />
+    </div>
+
+    <div>
+        <label asp-for="Series.Rating"></label>
+        <input type="number" name="Series.Rating" value="@Model.Series.Rating" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>
