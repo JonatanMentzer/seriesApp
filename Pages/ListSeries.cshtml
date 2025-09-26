@@ -1,17 +1,19 @@
 @page
 @model Series.Pages.ListSeriesModel
+
 @{
     ViewData["Title"] = "Series List";
+    Layout = "_Layout";
 }
 
 <h2>Series List</h2>
 
 <p>
-    <a href="?sortOrder=asc">Sort by Rating ↑</a> |
-    <a href="?sortOrder=desc">Sort by Rating ↓</a>
+    <a asp-page="./ListSeries" asp-route-sortOrder="asc">Sort by Rating ↑</a> |
+    <a asp-page="./ListSeries" asp-route-sortOrder="desc">Sort by Rating ↓</a>
 </p>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Title</th>

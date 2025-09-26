@@ -1,0 +1,32 @@
+@page
+@model Series.Pages.GenreAveragesModel
+
+@{
+    ViewData["Title"] = "Average Ratings per Genre";
+    Layout = "_Layout";
+}
+
+<h2>Average Ratings per Genre</h2>
+
+<p>
+    <a href="?sortOrder=asc">Sort Ascending ↑</a> |
+    <a href="?sortOrder=desc">Sort Descending ↓</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model.GenreAverages)
+        {
+            <tr>
+                <td>@g.GenreName</td>
+                <td>@g.AverageRating.ToString("0.00")</td>
+            </tr>
+        }
+    </tbody>
+</table>

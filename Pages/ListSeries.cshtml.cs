@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Series.Data;
@@ -19,13 +20,10 @@ namespace Series.Pages
         public void OnGet(string sortOrder)
         {
             var query = _context.Series
-                .Include(s => s.SeriesGenres)
-                    .ThenInclude(sg => sg.Genre)
-                .Include(s => s.SeriesCreators)
-                    .ThenInclude(sc => sc.Creator)
+                .Include(s => s.SeriesGenres).ThenInclude(sg => sg.Genre)
+                .Include(s => s.SeriesCreators).ThenInclude(sc => sc.Creator)
                 .AsQueryable();
 
-            // Sort by rating
             query = sortOrder switch
             {
                 "asc" => query.OrderBy(s => s.Rating),

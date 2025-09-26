@@ -32,10 +32,30 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/programmering/csharp/series/Pages/CompanyAverages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcGFueUF2ZXJhZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/programmering/csharp/series/Pages/CreatorAverages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRvckF2ZXJhZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/programmering/csharp/series/Pages/GenreAverages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2VucmVBdmVyYWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/programmering/csharp/series/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/programmering/csharp/series/Pages/ListSeries.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdFNlcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/programmering/csharp/series/Pages/YearAverages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcWWVhckF2ZXJhZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/programmering/csharp/series/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

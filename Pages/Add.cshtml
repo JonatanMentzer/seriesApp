@@ -1,36 +1,40 @@
 @page
 @model Series.Pages.AddModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add Series";
+}
 <h2>Add Series</h2>
 
 <form method="post">
     @Html.AntiForgeryToken()
 
     <div>
-        <label asp-for="Series.Title"></label>
+        <label asp-for="Series.Title">Title</label><br />
         <input type="text" name="Series.Title" value="@Model.Series.Title" />    </div>
 
     <div>
-        <label asp-for="Series.ReleaseYear"></label>
+        <label asp-for="Series.ReleaseYear">Release Year</label><br />
         <input type="number" name="Series.ReleaseYear" value="@Model.Series.ReleaseYear" />
     </div>
 
     <div>
-        <label asp-for="Series.Company"></label>
+        <label asp-for="Series.Company">Company</label><br />
         <input type="text" name="Series.Company" value="@Model.Series.Company" />
     </div>
 
     <div>
-        <label asp-for="CreatorName"></label>
+        <label asp-for="CreatorName">Creator</label><br />
         <input type="text" name="CreatorName" value="@Model.CreatorName" />
     </div>
 
     <div>
-        <label asp-for="GenreName"></label>
+        <label asp-for="GenreName">Genre</label><br />
         <input type="text" name="GenreName" value="@Model.GenreName" />
     </div>
 
     <div>
-        <label asp-for="Series.Rating"></label>
+        <label asp-for="Series.Rating">Rating</label><br />
         <input type="number" name="Series.Rating" value="@Model.Series.Rating" />
     </div>
 

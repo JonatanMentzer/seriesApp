@@ -1,0 +1,31 @@
+@page
+@model Series.Pages.CompanyAveragesModel
+@{
+    ViewData["Title"] = "Average Ratings per Company";
+    Layout = "_Layout";
+}
+
+<h2>Average Ratings per Company</h2>
+
+<p>
+    <a href="?sortOrder=asc">Sort Ascending ↑</a> |
+    <a href="?sortOrder=desc">Sort Descending ↓</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model.CompanyAverages)
+        {
+            <tr>
+                <td>@c.Company</td>
+                <td>@c.AverageRating.ToString("0.00")</td>
+            </tr>
+        }
+    </tbody>
+</table>

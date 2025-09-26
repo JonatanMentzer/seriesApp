@@ -77,7 +77,7 @@ namespace Series.Pages
 
             _context.SaveChanges();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Add");
         }
 
     }

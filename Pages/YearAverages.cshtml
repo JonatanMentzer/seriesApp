@@ -1,0 +1,31 @@
+@page
+@model Series.Pages.YearAveragesModel
+@{
+    ViewData["Title"] = "Average Ratings per Year";
+    Layout = "_Layout";
+}
+
+<h2>Average Ratings per Year</h2>
+
+<p>
+    <a href="?sortOrder=asc">Sort Ascending ↑</a> |
+    <a href="?sortOrder=desc">Sort Descending ↓</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var y in Model.YearAverages)
+        {
+            <tr>
+                <td>@y.ReleaseYear</td>
+                <td>@y.AverageRating.ToString("0.00")</td>
+            </tr>
+        }
+    </tbody>
+</table>
