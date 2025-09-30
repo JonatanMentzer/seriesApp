@@ -15,6 +15,10 @@ namespace Series.Pages
 
         public IList<CompanyAverage> CompanyAverages { get; set; } = new List<CompanyAverage>();
 
+        /// <summary>
+        /// Orders companies based on the average rating of companies' series
+        /// </summary>
+        /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
             var query = _context.Series

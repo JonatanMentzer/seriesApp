@@ -17,6 +17,10 @@ namespace Series.Pages
 
         public IList<Series.Models.Series> SeriesList { get; set; } = new List<Series.Models.Series>();
 
+        /// <summary>
+        /// Orders series based on their rating.
+        /// </summary>
+        /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
             var query = _context.Series

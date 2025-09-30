@@ -15,6 +15,10 @@ namespace Series.Pages
 
         public IList<GenreAverage> GenreAverages { get; set; } = new List<GenreAverage>();
 
+        /// <summary>
+        /// Orders genres based on the average rating of series in that genre
+        /// </summary>
+        /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
             var query = _context.Genres

@@ -31,6 +31,11 @@ namespace Series.Pages
         {
         }
 
+        /// <summary>
+        /// Adds a new entry to the data base using the filled in information.
+        /// The information should contain: title, release year, company, creators, genres and a rating.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)

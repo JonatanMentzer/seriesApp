@@ -15,6 +15,10 @@ namespace Series.Pages
 
         public IList<CreatorAverage> CreatorAverages { get; set; } = new List<CreatorAverage>();
 
+        /// <summary>
+        /// Orders creators by the average rating of creators' series 
+        /// </summary>
+        /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
             var query = _context.Creators
