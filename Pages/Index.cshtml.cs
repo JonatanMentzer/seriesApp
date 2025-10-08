@@ -6,14 +6,15 @@ using Series.Models;
 
 namespace Series.Pages
 {
-    public class ListSeriesModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly SeriesContext _context;
 
-        public ListSeriesModel(SeriesContext context)
+        public IndexModel(SeriesContext context)
         {
             _context = context;
         }
+        public string SortOrder { get; set; } = "desc";
 
         public IList<Series.Models.Series> SeriesList { get; set; } = new List<Series.Models.Series>();
 
@@ -21,8 +22,10 @@ namespace Series.Pages
         /// Orders series based on their rating.
         /// </summary>
         /// <param name="sortOrder">Ascending or descending sorting</param>
-        public void OnGet(string sortOrder)
+        public void OnGet(string sortOrder = "desc")
         {
+            SortOrder = sortOrder;
+
             var query = _context.Series
                 .Include(s => s.SeriesGenres).ThenInclude(sg => sg.Genre)
                 .Include(s => s.SeriesCreators).ThenInclude(sc => sc.Creator)

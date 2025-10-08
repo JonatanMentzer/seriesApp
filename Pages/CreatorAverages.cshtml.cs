@@ -12,7 +12,7 @@ namespace Series.Pages
         {
             _context = context;
         }
-
+        public string SortOrder { get; set; } = "desc";
         public IList<CreatorAverage> CreatorAverages { get; set; } = new List<CreatorAverage>();
 
         /// <summary>
@@ -21,6 +21,8 @@ namespace Series.Pages
         /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
+            SortOrder = sortOrder;
+
             var query = _context.Creators
                 .Include(c => c.SeriesCreators)
                     .ThenInclude(sc => sc.Series)

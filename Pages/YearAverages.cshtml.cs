@@ -12,7 +12,7 @@ namespace Series.Pages
         {
             _context = context;
         }
-
+        public string SortOrder { get; set; } = "desc";
         public IList<YearAverage> YearAverages { get; set; } = new List<YearAverage>();
 
         /// <summary>
@@ -21,6 +21,8 @@ namespace Series.Pages
         /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
+            SortOrder = sortOrder;
+
             var query = _context.Series
                 .GroupBy(s => s.ReleaseYear)
                 .Select(g => new YearAverage
@@ -32,6 +34,7 @@ namespace Series.Pages
             YearAverages = sortOrder == "asc"
                 ? query.OrderBy(y => y.AverageRating).ToList()
                 : query.OrderByDescending(y => y.AverageRating).ToList();
+                
         }
 
         public class YearAverage

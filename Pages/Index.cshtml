@@ -1,8 +1,40 @@
 @page
-<h2>Welcome to Series DB</h2>
-<a href="/Add">Add a new series</a>
-<a href="/ListSeries">List series</a>
-<a href="/GenreAverages">List genre ratings</a>
-<a href="/CreatorAverages">List creator ratings</a>
-<a href="/YearAverages">Year Ratings</a>
-<a href="/CompanyAverages">Company Ratings</a>
+@model Series.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Series List";
+    Layout = "_Layout";
+}
+
+<h2>Series List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Release Year</th>
+            <th>Company</th>
+            <th>
+                <a href="ListSeries?sortOrder=@(Model.SortOrder == "asc" ? "desc" : "asc")"
+                   style="text-decoration:none; color:white;">
+                    Rating @(Model.SortOrder == "asc" ? "↑" : "↓")
+                </a>
+            </th>
+            <th>Genres</th>
+            <th>Creators</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.SeriesList)
+        {
+            <tr>
+                <td>@s.Title</td>
+                <td>@s.ReleaseYear</td>
+                <td>@s.Company</td>
+                <td>@s.Rating</td>
+                <td>@string.Join(", ", s.SeriesGenres.Select(g => g.Genre.Name))</td>
+                <td>@string.Join(", ", s.SeriesCreators.Select(c => c.Creator.Name))</td>
+            </tr>
+        }
+    </tbody>
+</table>

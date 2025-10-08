@@ -7,16 +7,16 @@
 
 <h2>Average Ratings per Creator</h2>
 
-<p>
-    <a href="?sortOrder=asc">Sort Ascending ↑</a> |
-    <a href="?sortOrder=desc">Sort Descending ↓</a>
-</p>
-
 <table>
     <thead>
         <tr>
             <th>Creator</th>
-            <th>Average Rating</th>
+            <th>
+                <a href="CreatorAverages?sortOrder=@(Model.SortOrder == "asc" ? "desc" : "asc")"
+                   style="text-decoration:none; color:white;">
+                    Rating @(Model.SortOrder == "asc" ? "↑" : "↓")
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>

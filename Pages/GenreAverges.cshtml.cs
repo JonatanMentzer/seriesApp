@@ -12,7 +12,7 @@ namespace Series.Pages
         {
             _context = context;
         }
-
+        public string SortOrder { get; set; } = "desc";
         public IList<GenreAverage> GenreAverages { get; set; } = new List<GenreAverage>();
 
         /// <summary>
@@ -21,6 +21,8 @@ namespace Series.Pages
         /// <param name="sortOrder">Ascending or descending sorting</param>
         public void OnGet(string sortOrder)
         {
+            SortOrder = sortOrder;
+
             var query = _context.Genres
                 .Include(g => g.SeriesGenres)
                     .ThenInclude(sg => sg.Series)

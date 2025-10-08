@@ -8,16 +8,16 @@
 
 <h2>Average Ratings per Genre</h2>
 
-<p>
-    <a href="?sortOrder=asc">Sort Ascending ↑</a> |
-    <a href="?sortOrder=desc">Sort Descending ↓</a>
-</p>
-
 <table>
     <thead>
         <tr>
             <th>Genre</th>
-            <th>Average Rating</th>
+            <th>
+                <a href="GenreAverages?sortOrder=@(Model.SortOrder == "asc" ? "desc" : "asc")"
+                   style="text-decoration:none; color:white;">
+                    Rating @(Model.SortOrder == "asc" ? "↑" : "↓")
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>
