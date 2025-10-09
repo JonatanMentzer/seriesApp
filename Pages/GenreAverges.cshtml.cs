@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Series.Data;
@@ -12,37 +13,82 @@ namespace Series.Pages
         {
             _context = context;
         }
+        [BindProperty(SupportsGet = true)]
+        public int CombinationSize { get; set; } = 1;
+        public List<GenreCombinationResult> GenreCombinations { get; set; } = new();
+        [BindProperty(SupportsGet = true)]
+        public int MinOccurrences { get; set; } = 1;
+        [BindProperty(SupportsGet = true)]
         public string SortOrder { get; set; } = "desc";
-        public IList<GenreAverage> GenreAverages { get; set; } = new List<GenreAverage>();
+        public IList<GenreCombinationResult> GenreAverages { get; set; } = new List<GenreCombinationResult>();
 
         /// <summary>
         /// Orders genres based on the average rating of series in that genre
         /// </summary>
         /// <param name="sortOrder">Ascending or descending sorting</param>
-        public void OnGet(string sortOrder)
+        public void OnGet()
         {
-            SortOrder = sortOrder;
+            var seriesList = _context.Series
+                .Include(s => s.SeriesGenres)
+                .ThenInclude(sg => sg.Genre)
+                .ToList();
 
-            var query = _context.Genres
-                .Include(g => g.SeriesGenres)
-                    .ThenInclude(sg => sg.Series)
-                .Select(g => new GenreAverage
+            var comboRatings = new Dictionary<string, List<double>>();
+
+            foreach (var s in seriesList)
+            {
+                var genres = s.SeriesGenres.Select(g => g.Genre.Name).Distinct().ToList();
+                if (genres.Count >= CombinationSize && CombinationSize > 0)
                 {
-                    GenreName = g.Name,
-                    AverageRating = g.SeriesGenres.Any()
-                        ? g.SeriesGenres.Average(sg => (double)sg.Series.Rating)
-                        : 0
+                    var combos = GetCombinations(genres, CombinationSize);
+                    foreach (var combo in combos)
+                    {
+                        var key = string.Join(",", combo.OrderBy(x => x));
+                        if (!comboRatings.ContainsKey(key))
+                            comboRatings[key] = new List<double>();
+                        comboRatings[key].Add(s.Rating);
+                    }
+                }
+            }
+
+            var result = comboRatings
+                .Where(kvp => kvp.Value.Count >= MinOccurrences)
+                .Select(kvp => new GenreCombinationResult
+                {
+                    Genres = kvp.Key.Split(',').ToList(),
+                    AverageRating = kvp.Value.Average()
                 });
 
-            GenreAverages = sortOrder == "asc"
-                ? query.OrderBy(g => g.AverageRating).ToList()
-                : query.OrderByDescending(g => g.AverageRating).ToList();
+            GenreAverages = SortOrder == "asc"
+                ? result.OrderBy(r => r.AverageRating).ToList()
+                : result.OrderByDescending(r => r.AverageRating).ToList();
         }
 
-        public class GenreAverage
+        private static List<List<string>> GetCombinations(List<string> list, int length)
         {
-            public string GenreName { get; set; } = string.Empty;
+            if (length == 1)
+                return list.Select(x => new List<string> { x }).ToList();
+
+            var result = new List<List<string>>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                var head = list[i];
+                var tailCombos = GetCombinations(list.Skip(i + 1).ToList(), length - 1);
+                foreach (var tail in tailCombos)
+                {
+                    var combo = new List<string> { head };
+                    combo.AddRange(tail);
+                    result.Add(combo);
+                }
+            }
+            return result;
+        }
+
+        public class GenreCombinationResult
+        {
+            public List<string> Genres { get; set; } = new();
             public double AverageRating { get; set; }
+            public int Count { get; set; }
         }
     }
 }

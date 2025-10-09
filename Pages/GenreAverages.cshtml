@@ -8,12 +8,23 @@
 
 <h2>Average Ratings per Genre</h2>
 
+<form method="get" style="text-align:center;">
+    <label for="combinationSize">Combination Size:</label>
+    <input type="number" id="combinationSize" name="combinationSize" 
+           value="@Model.CombinationSize" min="1" max="10" />
+    <label for="minOccurrences">Min Occurrences:</label>
+    <input type="number" id="minOccurrences" name="minOccurrences"
+           value="@Model.MinOccurrences" min="1" />
+    <input type="hidden" name="sortOrder" value="@Model.SortOrder" />
+    <button type="submit">Show</button>
+</form>
+
 <table>
     <thead>
         <tr>
             <th>Genre</th>
             <th>
-                <a href="GenreAverages?sortOrder=@(Model.SortOrder == "asc" ? "desc" : "asc")"
+                <a href="GenreAverages?sortOrder=@(Model.SortOrder == "asc" ? "desc" : "asc")&combinationSize=@Model.CombinationSize&minOccurances=@Model.MinOccurances"
                    style="text-decoration:none; color:white;">
                     Rating @(Model.SortOrder == "asc" ? "↑" : "↓")
                 </a>
@@ -24,7 +35,7 @@
         @foreach (var g in Model.GenreAverages)
         {
             <tr>
-                <td>@g.GenreName</td>
+                <td>@String.Join(", ",g.Genres)</td>
                 <td>@g.AverageRating.ToString("0.00")</td>
             </tr>
         }
